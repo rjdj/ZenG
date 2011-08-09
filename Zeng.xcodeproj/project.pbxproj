@@ -1,0 +1,416 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D8669A5713F06D49003BFE03 /* PdAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CA74C713F00DF800F0ABA0 /* PdAudio.m */; };
+		D8669A5913F06D6A003BFE03 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8669A5813F06D6A003BFE03 /* Accelerate.framework */; };
+		D8669A5D13F06D95003BFE03 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8669A5C13F06D95003BFE03 /* AudioUnit.framework */; };
+		D8669A5F13F06DA5003BFE03 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8669A5E13F06DA4003BFE03 /* AudioToolbox.framework */; };
+		D8669A6B13F06E7A003BFE03 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D8669A6A13F06E7A003BFE03 /* libstdc++.dylib */; };
+		D88CB54A13F1BE2900B7D402 /* ObjectView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8669A4F13F06CA0003BFE03 /* ObjectView.m */; };
+		D88CB54C13F1BE2E00B7D402 /* LetView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8669A5313F06CA0003BFE03 /* LetView.m */; };
+		D88CB55713F1BEF400B7D402 /* osc.icns in Resources */ = {isa = PBXBuildFile; fileRef = D88CB55613F1BEF400B7D402 /* osc.icns */; };
+		D88CB55A13F1C75300B7D402 /* ZGProjectWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D88CB55913F1C75300B7D402 /* ZGProjectWindowController.m */; };
+		D88CB56E13F1E07200B7D402 /* libzengarden.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D88CB56D13F1E07200B7D402 /* libzengarden.a */; };
+		D8CA749B13F00DA000F0ABA0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8CA749A13F00DA000F0ABA0 /* Cocoa.framework */; };
+		D8CA74A513F00DA000F0ABA0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D8CA74A313F00DA000F0ABA0 /* InfoPlist.strings */; };
+		D8CA74A813F00DA000F0ABA0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CA74A713F00DA000F0ABA0 /* main.m */; };
+		D8CA74AB13F00DA000F0ABA0 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D8CA74A913F00DA000F0ABA0 /* Credits.rtf */; };
+		D8CA74AE13F00DA000F0ABA0 /* ZGProjectDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CA74AD13F00DA000F0ABA0 /* ZGProjectDocument.m */; };
+		D8CA74B113F00DA000F0ABA0 /* Zeng.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8CA74AF13F00DA000F0ABA0 /* Zeng.xib */; };
+		D8CA74B413F00DA000F0ABA0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8CA74B213F00DA000F0ABA0 /* MainMenu.xib */; };
+		D8CA74C213F00DEF00F0ABA0 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CA74BB13F00DEF00F0ABA0 /* HeaderView.m */; };
+		D8CA74C313F00DEF00F0ABA0 /* ProjectView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CA74BD13F00DEF00F0ABA0 /* ProjectView.m */; };
+		D8CA74C413F00DEF00F0ABA0 /* HelpView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CA74BF13F00DEF00F0ABA0 /* HelpView.m */; };
+		D8CA74C513F00DEF00F0ABA0 /* CanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CA74C113F00DEF00F0ABA0 /* CanvasView.m */; };
+		D8CA74CE13F00E3A00F0ABA0 /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8CA74CC13F00E3A00F0ABA0 /* libsndfile.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D8669A4E13F06CA0003BFE03 /* ObjectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectView.h; sourceTree = "<group>"; };
+		D8669A4F13F06CA0003BFE03 /* ObjectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectView.m; sourceTree = "<group>"; };
+		D8669A5013F06CA0003BFE03 /* BangView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BangView.h; sourceTree = "<group>"; };
+		D8669A5113F06CA0003BFE03 /* BangView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BangView.m; sourceTree = "<group>"; };
+		D8669A5213F06CA0003BFE03 /* LetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LetView.h; sourceTree = "<group>"; };
+		D8669A5313F06CA0003BFE03 /* LetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LetView.m; sourceTree = "<group>"; };
+		D8669A5813F06D6A003BFE03 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		D8669A5A13F06D82003BFE03 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D8669A5C13F06D95003BFE03 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		D8669A5E13F06DA4003BFE03 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D8669A6A13F06E7A003BFE03 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/gcc/i686-apple-darwin10/4.0.1/libstdc++.dylib"; sourceTree = SDKROOT; };
+		D88CB55613F1BEF400B7D402 /* osc.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = osc.icns; sourceTree = "<group>"; };
+		D88CB55813F1C75300B7D402 /* ZGProjectWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGProjectWindowController.h; sourceTree = "<group>"; };
+		D88CB55913F1C75300B7D402 /* ZGProjectWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGProjectWindowController.m; sourceTree = "<group>"; };
+		D88CB55D13F1DEC400B7D402 /* ZenGarden.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZenGarden.h; path = ZenGarden/src/ZenGarden.h; sourceTree = SOURCE_ROOT; };
+		D88CB55E13F1DEC400B7D402 /* ZGCallbackFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZGCallbackFunction.h; path = ZenGarden/src/ZGCallbackFunction.h; sourceTree = SOURCE_ROOT; };
+		D88CB56D13F1E07200B7D402 /* libzengarden.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzengarden.a; path = "../../../../Library/Developer/Xcode/DerivedData/ZenGarden-abcmpeyosgpujhawuuoznwydqkle/Build/Products/Release/libzengarden.a"; sourceTree = "<group>"; };
+		D8CA749613F00DA000F0ABA0 /* Zeng.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zeng.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8CA749A13F00DA000F0ABA0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		D8CA749D13F00DA000F0ABA0 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		D8CA749E13F00DA000F0ABA0 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		D8CA749F13F00DA000F0ABA0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D8CA74A213F00DA000F0ABA0 /* Zeng-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Zeng-Info.plist"; sourceTree = "<group>"; };
+		D8CA74A413F00DA000F0ABA0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D8CA74A613F00DA000F0ABA0 /* Zeng-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Zeng-Prefix.pch"; sourceTree = "<group>"; };
+		D8CA74A713F00DA000F0ABA0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D8CA74AA13F00DA000F0ABA0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		D8CA74AC13F00DA000F0ABA0 /* ZGProjectDocument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZGProjectDocument.h; sourceTree = "<group>"; };
+		D8CA74AD13F00DA000F0ABA0 /* ZGProjectDocument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZGProjectDocument.m; sourceTree = "<group>"; };
+		D8CA74B013F00DA000F0ABA0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Zeng.xib; sourceTree = "<group>"; };
+		D8CA74B313F00DA000F0ABA0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		D8CA74BA13F00DEF00F0ABA0 /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
+		D8CA74BB13F00DEF00F0ABA0 /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
+		D8CA74BC13F00DEF00F0ABA0 /* ProjectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectView.h; sourceTree = "<group>"; };
+		D8CA74BD13F00DEF00F0ABA0 /* ProjectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectView.m; sourceTree = "<group>"; };
+		D8CA74BE13F00DEF00F0ABA0 /* HelpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpView.h; sourceTree = "<group>"; };
+		D8CA74BF13F00DEF00F0ABA0 /* HelpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpView.m; sourceTree = "<group>"; };
+		D8CA74C013F00DEF00F0ABA0 /* CanvasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CanvasView.h; sourceTree = "<group>"; };
+		D8CA74C113F00DEF00F0ABA0 /* CanvasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CanvasView.m; sourceTree = "<group>"; };
+		D8CA74C613F00DF800F0ABA0 /* PdAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PdAudio.h; sourceTree = "<group>"; };
+		D8CA74C713F00DF800F0ABA0 /* PdAudio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PdAudio.m; sourceTree = "<group>"; };
+		D8CA74CC13F00E3A00F0ABA0 /* libsndfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsndfile.a; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D8CA749313F00DA000F0ABA0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8669A6B13F06E7A003BFE03 /* libstdc++.dylib in Frameworks */,
+				D8669A5F13F06DA5003BFE03 /* AudioToolbox.framework in Frameworks */,
+				D8669A5D13F06D95003BFE03 /* AudioUnit.framework in Frameworks */,
+				D8669A5913F06D6A003BFE03 /* Accelerate.framework in Frameworks */,
+				D8CA749B13F00DA000F0ABA0 /* Cocoa.framework in Frameworks */,
+				D8CA74CE13F00E3A00F0ABA0 /* libsndfile.a in Frameworks */,
+				D88CB56E13F1E07200B7D402 /* libzengarden.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D8669A6C13F06EC1003BFE03 /* ZenGarden */ = {
+			isa = PBXGroup;
+			children = (
+				D8CA74C613F00DF800F0ABA0 /* PdAudio.h */,
+				D8CA74C713F00DF800F0ABA0 /* PdAudio.m */,
+				D88CB55D13F1DEC400B7D402 /* ZenGarden.h */,
+				D88CB55E13F1DEC400B7D402 /* ZGCallbackFunction.h */,
+				D88CB56D13F1E07200B7D402 /* libzengarden.a */,
+				D8CA74CC13F00E3A00F0ABA0 /* libsndfile.a */,
+			);
+			name = ZenGarden;
+			sourceTree = "<group>";
+		};
+		D88CB54D13F1BE6200B7D402 /* Object Views */ = {
+			isa = PBXGroup;
+			children = (
+				D8669A4E13F06CA0003BFE03 /* ObjectView.h */,
+				D8669A4F13F06CA0003BFE03 /* ObjectView.m */,
+				D8669A5013F06CA0003BFE03 /* BangView.h */,
+				D8669A5113F06CA0003BFE03 /* BangView.m */,
+				D8669A5213F06CA0003BFE03 /* LetView.h */,
+				D8669A5313F06CA0003BFE03 /* LetView.m */,
+			);
+			name = "Object Views";
+			sourceTree = "<group>";
+		};
+		D8CA748B13F00D9F00F0ABA0 = {
+			isa = PBXGroup;
+			children = (
+				D8CA74A013F00DA000F0ABA0 /* Zeng */,
+				D8CA749913F00DA000F0ABA0 /* Frameworks */,
+				D8CA749713F00DA000F0ABA0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D8CA749713F00DA000F0ABA0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D8CA749613F00DA000F0ABA0 /* Zeng.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D8CA749913F00DA000F0ABA0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D8669A6A13F06E7A003BFE03 /* libstdc++.dylib */,
+				D8669A5E13F06DA4003BFE03 /* AudioToolbox.framework */,
+				D8669A5C13F06D95003BFE03 /* AudioUnit.framework */,
+				D8669A5A13F06D82003BFE03 /* AudioToolbox.framework */,
+				D8669A5813F06D6A003BFE03 /* Accelerate.framework */,
+				D8CA749A13F00DA000F0ABA0 /* Cocoa.framework */,
+				D8CA749C13F00DA000F0ABA0 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D8CA749C13F00DA000F0ABA0 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D8CA749D13F00DA000F0ABA0 /* AppKit.framework */,
+				D8CA749E13F00DA000F0ABA0 /* CoreData.framework */,
+				D8CA749F13F00DA000F0ABA0 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		D8CA74A013F00DA000F0ABA0 /* Zeng */ = {
+			isa = PBXGroup;
+			children = (
+				D8CA74B213F00DA000F0ABA0 /* MainMenu.xib */,
+				D8CA74AC13F00DA000F0ABA0 /* ZGProjectDocument.h */,
+				D8CA74AD13F00DA000F0ABA0 /* ZGProjectDocument.m */,
+				D88CB55813F1C75300B7D402 /* ZGProjectWindowController.h */,
+				D88CB55913F1C75300B7D402 /* ZGProjectWindowController.m */,
+				D8CA74AF13F00DA000F0ABA0 /* Zeng.xib */,
+				D8CA74C013F00DEF00F0ABA0 /* CanvasView.h */,
+				D8CA74C113F00DEF00F0ABA0 /* CanvasView.m */,
+				D88CB54D13F1BE6200B7D402 /* Object Views */,
+				D8CA74BA13F00DEF00F0ABA0 /* HeaderView.h */,
+				D8CA74BB13F00DEF00F0ABA0 /* HeaderView.m */,
+				D8CA74BC13F00DEF00F0ABA0 /* ProjectView.h */,
+				D8CA74BD13F00DEF00F0ABA0 /* ProjectView.m */,
+				D8CA74BE13F00DEF00F0ABA0 /* HelpView.h */,
+				D8CA74BF13F00DEF00F0ABA0 /* HelpView.m */,
+				D8669A6C13F06EC1003BFE03 /* ZenGarden */,
+				D8CA74A113F00DA000F0ABA0 /* Supporting Files */,
+			);
+			path = Zeng;
+			sourceTree = "<group>";
+		};
+		D8CA74A113F00DA000F0ABA0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D88CB55613F1BEF400B7D402 /* osc.icns */,
+				D8CA74A213F00DA000F0ABA0 /* Zeng-Info.plist */,
+				D8CA74A313F00DA000F0ABA0 /* InfoPlist.strings */,
+				D8CA74A613F00DA000F0ABA0 /* Zeng-Prefix.pch */,
+				D8CA74A713F00DA000F0ABA0 /* main.m */,
+				D8CA74A913F00DA000F0ABA0 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D8CA749513F00DA000F0ABA0 /* Zeng */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D8CA74B713F00DA000F0ABA0 /* Build configuration list for PBXNativeTarget "Zeng" */;
+			buildPhases = (
+				D8CA749213F00DA000F0ABA0 /* Sources */,
+				D8CA749313F00DA000F0ABA0 /* Frameworks */,
+				D8CA749413F00DA000F0ABA0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Zeng;
+			productName = Zeng;
+			productReference = D8CA749613F00DA000F0ABA0 /* Zeng.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D8CA748D13F00D9F00F0ABA0 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = D8CA749013F00D9F00F0ABA0 /* Build configuration list for PBXProject "Zeng" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D8CA748B13F00D9F00F0ABA0;
+			productRefGroup = D8CA749713F00DA000F0ABA0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D8CA749513F00DA000F0ABA0 /* Zeng */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D8CA749413F00DA000F0ABA0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8CA74A513F00DA000F0ABA0 /* InfoPlist.strings in Resources */,
+				D8CA74AB13F00DA000F0ABA0 /* Credits.rtf in Resources */,
+				D8CA74B113F00DA000F0ABA0 /* Zeng.xib in Resources */,
+				D8CA74B413F00DA000F0ABA0 /* MainMenu.xib in Resources */,
+				D88CB55713F1BEF400B7D402 /* osc.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D8CA749213F00DA000F0ABA0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8CA74A813F00DA000F0ABA0 /* main.m in Sources */,
+				D8CA74AE13F00DA000F0ABA0 /* ZGProjectDocument.m in Sources */,
+				D8CA74C213F00DEF00F0ABA0 /* HeaderView.m in Sources */,
+				D8CA74C313F00DEF00F0ABA0 /* ProjectView.m in Sources */,
+				D8CA74C413F00DEF00F0ABA0 /* HelpView.m in Sources */,
+				D8CA74C513F00DEF00F0ABA0 /* CanvasView.m in Sources */,
+				D8669A5713F06D49003BFE03 /* PdAudio.m in Sources */,
+				D88CB54A13F1BE2900B7D402 /* ObjectView.m in Sources */,
+				D88CB54C13F1BE2E00B7D402 /* LetView.m in Sources */,
+				D88CB55A13F1C75300B7D402 /* ZGProjectWindowController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D8CA74A313F00DA000F0ABA0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D8CA74A413F00DA000F0ABA0 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D8CA74A913F00DA000F0ABA0 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D8CA74AA13F00DA000F0ABA0 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		D8CA74AF13F00DA000F0ABA0 /* Zeng.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D8CA74B013F00DA000F0ABA0 /* en */,
+			);
+			name = Zeng.xib;
+			sourceTree = "<group>";
+		};
+		D8CA74B213F00DA000F0ABA0 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D8CA74B313F00DA000F0ABA0 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D8CA74B513F00DA000F0ABA0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		D8CA74B613F00DA000F0ABA0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		D8CA74B813F00DA000F0ABA0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Zeng/Zeng-Prefix.pch";
+				INFOPLIST_FILE = "Zeng/Zeng-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Zeng\"",
+					"\"$(SDKROOT)/usr/lib/gcc/i686-apple-darwin10/4.0.1\"",
+					"\"$(SRCROOT)/ZenGarden/libs/Darwin-i386\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/ZenGarden-abcmpeyosgpujhawuuoznwydqkle/Build/Products/Debug\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/ZenGarden-abcmpeyosgpujhawuuoznwydqkle/Build/Products/Release\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D8CA74B913F00DA000F0ABA0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Zeng/Zeng-Prefix.pch";
+				INFOPLIST_FILE = "Zeng/Zeng-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Zeng\"",
+					"\"$(SDKROOT)/usr/lib/gcc/i686-apple-darwin10/4.0.1\"",
+					"\"$(SRCROOT)/ZenGarden/libs/Darwin-i386\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/ZenGarden-abcmpeyosgpujhawuuoznwydqkle/Build/Products/Debug\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/ZenGarden-abcmpeyosgpujhawuuoznwydqkle/Build/Products/Release\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D8CA749013F00D9F00F0ABA0 /* Build configuration list for PBXProject "Zeng" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8CA74B513F00DA000F0ABA0 /* Debug */,
+				D8CA74B613F00DA000F0ABA0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D8CA74B713F00DA000F0ABA0 /* Build configuration list for PBXNativeTarget "Zeng" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8CA74B813F00DA000F0ABA0 /* Debug */,
+				D8CA74B913F00DA000F0ABA0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D8CA748D13F00D9F00F0ABA0 /* Project object */;
+}
