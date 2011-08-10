@@ -39,9 +39,9 @@ void zgCallbackFunction(ZGCallbackFunction function, void *userData, void *ptr) 
   if (self) {
     // Add pdAudio and zgContext 
     pdAudio = [[PdAudio alloc] initWithInputChannels:0 OutputChannels:2 blockSize:256
-                                       andSampleRate:44100.0];
+        andSampleRate:44100.0];
     [pdAudio play];
-    zgContext = [[PdAudio controller] newContext];
+    zgContext = pdAudio.zgContext;
     
     
     [self showWindow:windowNibName];
@@ -51,7 +51,9 @@ void zgCallbackFunction(ZGCallbackFunction function, void *userData, void *ptr) 
 
 - (void)dealloc
 {
-    [super dealloc];
+  [pdAudio pause];
+  [pdAudio release];
+  [super dealloc];
 }
 
 - (void)setProjectFilePath:(NSString *)projectFilePath {

@@ -20,13 +20,13 @@
 @end
 
 @interface LetView : NSView {
-  
+
   NSObject <LetViewDelegate> *delegate;
   NSCursor *cursor;
   NSTrackingArea *letTrackingArea;
   BOOL isInlet; // YES is Inlet, NO is Outlet
-  
   BOOL isHighlighted;
+
 }
 
 @property (nonatomic, readwrite) BOOL isInlet;

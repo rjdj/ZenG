@@ -18,8 +18,8 @@
 - (BOOL)acceptsFirstResponder { return YES; }
 
 - (void)mouseDown:(NSEvent *)theEvent {
-  NSLog(@"Mouse Down");
-
+  NSPoint invertedMousePoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+  NSLog(@"Mouse Down x:%f y:%f", invertedMousePoint.x, invertedMousePoint.y);
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -27,6 +27,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code here.
+        objectSet = [[NSMutableSet alloc] init];
     }
     
     return self;
@@ -34,9 +35,9 @@
 
 - (void)setZgGraph:(ZGGraph *)graph {
   NSLog(@"setZgGraph");
-  // set instance zgGraph
+  // set instance zgGraph and objectSet
   zgGraph = graph;
-  
+
   // query graph for all objects
   unsigned int numObjects = 0;
   ZGObject **zgObjectArray = zg_graph_get_objects(zgGraph, &numObjects);
@@ -51,9 +52,8 @@
   
   free(zgObjectArray);
   
-  // set up all connections
-  // set up everything necessary to draw
-  
+  [self setNeedsDisplay:YES];
+  [self needsDisplay];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -66,13 +66,15 @@
 
 - (void)dealloc
 {
-    [super dealloc];
+  [objectSet release];
+  [super dealloc];
 }
 
 - (void)drawRect:(NSRect)dirtyRect
 {
   // Drawing code here
   [self drawBackground:self.bounds];
+  [self drawExistingConnections];
 }
 
 - (void)toggleEditMode:(id)sender {
@@ -101,6 +103,58 @@
   else {
     [[NSColor whiteColor] setFill];
     NSRectFill(rect);
+  }
+}
+
+- (void)drawExistingConnections {
+  
+  // for every object in the canvas view
+  for (ObjectView *anObject in objectSet) {
+    
+    // for every outletView in each object
+    for (LetView *outletView in anObject.outletArray) {
+      
+      NSLog(@"Object Outlet View x:%f y:%f", outletView.frame.origin.x, outletView.frame.origin.y);
+      // set connection start point at current outlet
+      NSPoint outletMidPoint = NSMakePoint(NSMidX(outletView.frame), outletView.frame.origin.y);
+      NSPoint connectionStartPoint = NSMakePoint(outletMidPoint.x + anObject.frame.origin.x,
+                                               outletMidPoint.y + anObject.frame.origin.y);
+      
+      // query object's outlet array for outletView index
+      unsigned int outletIndex = (unsigned int)[anObject.outletArray indexOfObject:outletView];
+      unsigned int numConnections = 0;
+      
+      // return array of connection pairs for give outlet
+      ZGConnectionPair *zgConnectionPair =  zg_object_get_connections_at_outlet(anObject.zgObject, outletIndex, &numConnections);
+      
+      // for number of connected objects to outlet
+      for (int i = 0; i < numConnections; i++) {
+        
+        // find object view (and its associated inlet view) for given zgObject
+        ZGObject *zgObject = zgConnectionPair[i].object;
+        NSSet *matchingSet = [objectSet objectsPassingTest:^BOOL(id obj, BOOL *stop) {
+          ObjectView *objectView = (ObjectView *)obj;
+          return (objectView.zgObject == zgObject);
+        }];
+        ObjectView *objectView = [matchingSet anyObject];
+        NSView *inletView = [objectView.inletArray objectAtIndex:zgConnectionPair[i].letIndex];
+        
+        // set connection end point
+        NSPoint inletMidPoint = NSMakePoint(NSMidX(inletView.frame), inletView.frame.origin.y);
+        NSPoint connectionEndPoint = NSMakePoint(inletMidPoint.x + objectView.frame.origin.x,
+                                                 inletMidPoint.y + objectView.frame.origin.y);
+        
+        // draw a line from start point to end point
+        [[NSColor blackColor] setStroke];
+        [NSBezierPath setDefaultLineWidth:2.0f];
+        [NSBezierPath strokeLineFromPoint:connectionStartPoint
+                                  toPoint:connectionEndPoint];
+        NSLog(@"Connection Start x:%f, y:%f", connectionStartPoint.x, connectionStartPoint.y);
+        NSLog(@"Connection End x:%f, y:%f", connectionEndPoint.x, connectionEndPoint.y);
+      }
+      
+      free(zgConnectionPair);
+    }
   }
 }
 

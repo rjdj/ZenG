@@ -30,4 +30,6 @@
 
 - (void)drawBackground:(NSRect)rect;
 
+- (void)drawExistingConnections;
+
 @end
