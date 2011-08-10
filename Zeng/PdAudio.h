@@ -12,21 +12,17 @@
   NSUInteger numOutputChannels;
   NSUInteger blockSize;
   Float64 sampleRate;
-  NSMutableSet *contextSet;
+  ZGContext *zgContext;
 }
 
 @property (nonatomic, readonly) NSUInteger numInputChannels;
 @property (nonatomic, readonly) NSUInteger numOutputChannels;
 @property (nonatomic, readonly) NSUInteger blockSize;
 @property (nonatomic, readonly) Float64 sampleRate;
-@property (nonatomic, readonly) NSMutableSet *contextSet;
-
-+ (PdAudio *)controller;
+@property (nonatomic, readonly) ZGContext *zgContext;
 
 - (id)initWithInputChannels:(NSUInteger)inputChannels OutputChannels:(NSUInteger)outputChannels
     blockSize:(NSUInteger)framesPerBlock andSampleRate:(Float64)sampleRate;
-
-- (ZGContext *)newContext;
 
 - (void)play;
 - (void)pause;
