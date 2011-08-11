@@ -14,7 +14,7 @@
 #import "HelpView.h"
 #import "CanvasView.h"
 
-@interface ZGProjectWindowController : NSWindowController {
+@interface ZGProjectWindowController : NSWindowController <CanvasViewDelegate> {
   
   HeaderView *headerView;
   ProjectView *projectView;
@@ -25,6 +25,8 @@
   ZGContext *zgContext;
   
   NSString *projectFilePath;
+  NSMutableArray *builtInObjectLabelsArray;
+  NSMutableArray *allObjectLabelsArray;
   
 @private
   
@@ -35,6 +37,5 @@
 @property (nonatomic, retain) IBOutlet HelpView *helpView;
 @property (nonatomic, retain) IBOutlet CanvasView *canvasView;
 @property (nonatomic, retain) NSString *projectFilePath;
-
 
 @end
