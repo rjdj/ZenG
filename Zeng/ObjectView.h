@@ -22,7 +22,7 @@
 
 //- (void)endNewConnectionDrawingFromLet:(LetView *)aLetView withEvent:(NSEvent *)theEvent;
 
-//- (NSArray *)allObjectLabels;
+- (NSArray *)allObjectLabels;
 
 @end
 
@@ -34,7 +34,7 @@
   // Lets
   NSMutableArray *inletArray;
   NSMutableArray *outletArray;
-  
+
   // Textfield
   NSTextField *textField;
   NSTextView *fieldEditor;
@@ -51,7 +51,7 @@
   
   // Background
   BOOL isHighlighted;
-  NSColor *backgroundColour;
+  NSPoint mouseDownPositionInObject;
   
   // ZenGarden
   ZGObject *zgObject;
@@ -59,22 +59,20 @@
 
 @property (nonatomic, readonly) NSMutableArray *inletArray;
 @property (nonatomic, readonly) NSMutableArray *outletArray;
-@property (nonatomic, readonly) BOOL isHighlighted;
 @property (nonatomic, readonly) ZGObject *zgObject;
-
-- (id)initWithObject:(ZGObject *)zgObject andDelegate:(NSObject<ObjectViewDelegate> *)aDelegate;
+@property (nonatomic) BOOL isHighlighted;
 
 - (id)initWithFrame:(NSRect)frame delegate:(NSObject<ObjectViewDelegate> *)aDelegate;
 
-- (void)drawBackground:(NSRect)rect;
+- (id)initWithObject:(ZGObject *)zgObject andDelegate:(NSObject<ObjectViewDelegate> *)aDelegate;
 
-- (void)highlightObject:(BOOL)state;
+- (void)drawBackground:(NSRect)rect;
 
 - (void)addTextField:(NSRect)rect;
 
 - (void)setTextFieldEditable:(BOOL)state;
 
-- (void)addLet:(NSPoint)letOrigin isInlet:(BOOL)isInlet;
+- (void)addLet:(NSPoint)letOrigin isInlet:(BOOL)state;
 
 - (void)addObjectResizeTrackingRect:(NSRect)rect;
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D834EC6E13F46EDC00ADA831 /* ObjectTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D834EC6D13F46EDC00ADA831 /* ObjectTextField.m */; };
 		D8669A5713F06D49003BFE03 /* PdAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CA74C713F00DF800F0ABA0 /* PdAudio.m */; };
 		D8669A5913F06D6A003BFE03 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8669A5813F06D6A003BFE03 /* Accelerate.framework */; };
 		D8669A5D13F06D95003BFE03 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8669A5C13F06D95003BFE03 /* AudioUnit.framework */; };
@@ -32,6 +33,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D834EC6C13F46EDC00ADA831 /* ObjectTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectTextField.h; sourceTree = "<group>"; };
+		D834EC6D13F46EDC00ADA831 /* ObjectTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectTextField.m; sourceTree = "<group>"; };
 		D8669A4E13F06CA0003BFE03 /* ObjectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectView.h; sourceTree = "<group>"; };
 		D8669A4F13F06CA0003BFE03 /* ObjectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectView.m; sourceTree = "<group>"; };
 		D8669A5013F06CA0003BFE03 /* BangView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BangView.h; sourceTree = "<group>"; };
@@ -116,6 +119,8 @@
 				D8669A5113F06CA0003BFE03 /* BangView.m */,
 				D8669A5213F06CA0003BFE03 /* LetView.h */,
 				D8669A5313F06CA0003BFE03 /* LetView.m */,
+				D834EC6C13F46EDC00ADA831 /* ObjectTextField.h */,
+				D834EC6D13F46EDC00ADA831 /* ObjectTextField.m */,
 			);
 			name = "Object Views";
 			sourceTree = "<group>";
@@ -270,6 +275,7 @@
 				D88CB54A13F1BE2900B7D402 /* ObjectView.m in Sources */,
 				D88CB54C13F1BE2E00B7D402 /* LetView.m in Sources */,
 				D88CB55A13F1C75300B7D402 /* ZGProjectWindowController.m in Sources */,
+				D834EC6E13F46EDC00ADA831 /* ObjectTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

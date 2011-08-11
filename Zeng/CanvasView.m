@@ -12,6 +12,7 @@
 
 @synthesize isEditModeOn;
 @synthesize zgGraph;
+@synthesize delegate;
 
 - (BOOL)isFlipped { return YES; }
 
@@ -49,6 +50,10 @@
   
   [self setNeedsDisplay:YES];
   [self needsDisplay];
+}
+
+- (NSArray *)allObjectLabels {
+  return [delegate getAllObjectLabels];
 }
 
 - (void)dealloc

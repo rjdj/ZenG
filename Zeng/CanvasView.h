@@ -10,10 +10,17 @@
 #import "ZenGarden.h"
 #import "ObjectView.h"
 
+@class CanvasView;
+
+@protocol CanvasViewDelegate
+
+- (NSArray *)getAllObjectLabels;
+
+@end
 
 @interface CanvasView : NSView <ObjectViewDelegate> {
-
-  NSObject <ObjectViewDelegate> *delegate;
+  
+  NSObject <CanvasViewDelegate> *delegate;
   
   BOOL isEditModeOn;
   ZGGraph *zgGraph;
@@ -23,6 +30,7 @@
 
 @property (nonatomic, readonly) BOOL isEditModeOn;
 @property (nonatomic) ZGGraph *zgGraph;
+@property (nonatomic, retain) NSObject <CanvasViewDelegate> *delegate;
 
 - (void)drawZgGraph:(ZGGraph *)aZgGraph;
 

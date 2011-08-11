@@ -17,18 +17,33 @@
 @synthesize isHighlighted;
 @synthesize zgObject;
 
+
+#pragma mark - Initalisation & Deallocation
+
+- (BOOL)isFlipped { return YES; }
+
+- (BOOL)acceptsFirstResponder { return YES; }
+
 - (id)initWithFrame:(NSRect)frame delegate:(NSObject<ObjectViewDelegate> *)aDelegate {
   self = [super initWithFrame:frame];
   if (self) {
+    
     delegate = [aDelegate retain];
     inletArray = [[NSMutableArray alloc] init];
-    outletArray = [[NSMutableArray alloc] init];    
+    outletArray = [[NSMutableArray alloc] init]; 
+    
     isObjectNew = YES;
-    didTextChange = NO;
     zgObject = NULL;
-    previousString = NULL;
-    [self setFocusRingType:NSFocusRingOnly];
+
+    // text initialisations
     [self addTextField:frame];
+    didTextChange = NO;
+    previousString = NULL;
+    
+    mouseDownPositionInObject = NSZeroPoint;
+    [self setIsHighlighted:NO];
+    
+    // set up tracking areas
     [self addObjectResizeTrackingRect:frame];
     objectResizeTrackingArea = [[NSTrackingArea alloc] 
                                 initWithRect:objectResizeTrackingRect
@@ -38,28 +53,34 @@
                                           NSTrackingCursorUpdate)
                                 owner:self userInfo:nil];
     [self addTrackingArea:objectResizeTrackingArea];
-    [self highlightObject:NO];
+    
   }
   return self;
 }
 
 - (id)initWithObject:(ZGObject *)aZgObject andDelegate:(NSObject<ObjectViewDelegate> *)aDelegate {
+  // when drawing objects from a graph
+  // get object canvas position
   float canvasX = 0.0f;
   float canvasY = 0.0f;
   zg_object_get_canvas_position(aZgObject, &canvasX, &canvasY);
   NSRect frame = NSMakeRect(canvasX, canvasY, 70.0f, 30.0f);
+  
+  // initialise object
   self = [self initWithFrame:frame delegate:aDelegate];
   if (self != nil) {
+    
+    // get object textfield string and set it
     zgObject = aZgObject;
     char *str = zg_object_to_string(zgObject);
     [textField setStringValue:[NSString stringWithCString:str encoding:NSASCIIStringEncoding]];
     free(str);
     
-    // Add inlets
+    // add inlets
     for (int i = 0; i < zg_object_get_num_inlets(zgObject); i++) {
       [self addLet:NSMakePoint(self.bounds.origin.x + 10 + 38*i, 3) isInlet:YES];
     }
-    // Add outlets
+    // add outlets
     for (int i = 0; i < zg_object_get_num_outlets(zgObject); i++) {
       [self addLet:NSMakePoint(self.bounds.origin.x + 10 + 70*i, self.bounds.size.height - 6) isInlet:NO];
     }
@@ -75,17 +96,26 @@
   [super dealloc];
 }
 
+
+#pragma mark - Drawing
+
+- (void)setIsHighlighted:(BOOL)state {
+  [self setNeedsDisplay:YES];
+  [self needsDisplay];
+}
+
 - (void)drawRect:(NSRect)dirtyRect {
   
-  if ([[self window] firstResponder] == self) {
-    
-    [NSGraphicsContext saveGraphicsState];
-    
-    [[NSColor redColor] set];
-    NSSetFocusRingStyle(NSFocusRingOnly);
-    [[NSBezierPath bezierPathWithRect:[self bounds]] fill];
-    
-    [NSGraphicsContext restoreGraphicsState];
+  if ([(CanvasView *)self.superview isEditModeOn]) {
+    // if object is first responder or manually highlighted
+    if ([[self window] firstResponder] == self && ([[self window] isKeyWindow]) || (isHighlighted == YES)) {
+      
+      // draw focus ring
+      [NSGraphicsContext saveGraphicsState];
+      NSSetFocusRingStyle(NSFocusRingOnly);
+      [[NSBezierPath bezierPathWithRoundedRect:[self bounds] xRadius:5 yRadius:5] fill];
+      [NSGraphicsContext restoreGraphicsState];
+    }
   }
   
   [textField setFrame:NSMakeRect(self.bounds.origin.x + 5,
@@ -94,20 +124,7 @@
                                  self.bounds.size.height - 14)];
   
   [self drawBackground:self.bounds];
-  
-  if ([[self window] isKeyWindow] && [[self window] firstResponder] == self) {
-    
-    NSLog(@"Draw Focus Ring");
-  }
-  
 }
-
-- (BOOL)isFlipped { return YES; }
-
-- (BOOL)acceptsFirstResponder { return YES; }
-
-
-#pragma mark - Background Drawing
 
 - (void)drawBackground:(NSRect)rect {
    
@@ -129,40 +146,41 @@
   outsideStroke = [NSColor colorWithCalibratedRed:0.7 green:0.7 blue:0.8 alpha:1.0];
   [outsideStroke setStroke];
   [path stroke];
-  
 }
 
-- (void)highlightObject:(BOOL)state {
-  if (state) {
-    isHighlighted = YES;
-    backgroundColour = [NSColor greenColor];
-  }
-  else {
-    isHighlighted = NO;
-    backgroundColour = [NSColor blueColor];
-  }
-  [self setNeedsDisplay:YES];
-  [self needsDisplay];
-}
-
-
-#pragma mark - Let drawing
-
-- (void)addLet:(NSPoint)letOrigin isInlet:(BOOL)isInlet {
+- (void)addLet:(NSPoint)letOrigin isInlet:(BOOL)state {
   
+  // initialise let view and add it as a subview
   NSRect letRect = NSMakeRect(letOrigin.x, letOrigin.y, 12, 4);
-  
   LetView *aLetView = [[LetView alloc] initWithFrame:letRect delegate:self];
   [self addSubview:aLetView];
   
-  aLetView.isInlet = isInlet;
-  if (isInlet) {
+  [aLetView setIsInlet:state];
+  
+  // store let view in to appropriate array
+  if (state) {
     [inletArray addObject:aLetView]; 
   }
   else {
     [outletArray addObject:aLetView];
   }
 }
+
+
+#pragma mark - Let Events
+
+- (void)mouseDownOfLet:(LetView *)aLetView {
+  [delegate startNewConnectionDrawingFromLet:aLetView];
+}
+
+- (void)mouseDraggedOfLet:(LetView *)aLetView withEvent:(NSEvent *)theEvent {
+  [delegate setNewConnectionEndPointFromLet:aLetView withEvent:theEvent];
+}
+
+- (void)mouseUpOfLet:(LetView *)aLetView withEvent:(NSEvent *)theEvent {
+  [delegate endNewConnectionDrawingFromLet:aLetView withEvent:theEvent];
+}
+
 
 #pragma mark - TextField & Events
 
@@ -171,8 +189,8 @@
                                                             self.bounds.origin.y + 8,
                                                             self.bounds.size.width - 10,
                                                             self.bounds.size.height - 14)];
-  [textField setEditable:YES];
-  [textField setSelectable:YES];
+  [textField setEditable:[(CanvasView *)self.superview isEditModeOn]];
+  [textField setSelectable:[(CanvasView *)self.superview isEditModeOn]];
   [textField setBezeled:NO];
   [textField setDrawsBackground:NO];
   [textField setFont:[NSFont fontWithName:@"Monaco" size:12.0]];
@@ -187,22 +205,22 @@
 }
 
 - (void)controlTextDidBeginEditing:(NSNotification *)obj {
-  // NSTextField delegate method
-  [self highlightObject:YES];
-  fieldEditor = [[obj userInfo] objectForKey:@"NSFieldEditor"];  
-  [fieldEditor setDelegate:self];
+  [self setIsHighlighted:YES];
+  
+  // (joewhite4): Not meant to do this I think. Needed for auto complete though.
+  //  fieldEditor = [[obj userInfo] objectForKey:@"NSFieldEditor"];  
+  //  [fieldEditor setDelegate:self];
   previousString = NULL;
 }
 
 - (void)textDidChange:(NSNotification *)notification {
-  // NSTextView delegate method
-  NSLog(@"Text changed");
+  
+  NSLog(@"%@",[textField stringValue]);
   if (!isObjectNew) {
     didTextChange = YES;
   }
   // Currently an infinite loop
   //[fieldEditor completionsForPartialWordRange:NSRangeFromString([textField stringValue]) indexOfSelectedItem:0];
-  NSLog(@"%@",[textField stringValue]);
   //[fieldEditor complete:nil];
   
   BOOL textDidNotChange = [previousString isEqualToString:[fieldEditor string]];
@@ -281,7 +299,7 @@
     }
   }
   isObjectNew = NO;
-  [self highlightObject:NO];
+  [self setIsHighlighted:NO];
   [[textField window] endEditingFor: nil];
   [[textField window] makeFirstResponder: nil];
 }
@@ -289,12 +307,45 @@
 
 #pragma mark - Mouse events
 
-- (NSPoint)positionInsideObject:(NSPoint)fromEventPosition {
-  NSPoint convertedPoint = NSMakePoint(fromEventPosition.x - self.frame.origin.x,
-                                       [(CanvasView *)self.superview frame].size.height - 
-                                       fromEventPosition.y - self.frame.origin.y);
-  return convertedPoint;
+- (void)mouseDown:(NSEvent *)theEvent {
+  // convert mouse location to object view coordinate base
+  mouseDownPositionInObject = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+  
+  [[self window] resignFirstResponder];
+  [self becomeFirstResponder];
+  [self setNeedsDisplay:YES];
+  [self needsDisplay];
 }
+
+- (void)mouseDragged:(NSEvent *)theEvent {
+  
+  if ([(CanvasView *)self.superview isEditModeOn]) {
+    // convert mouse location to canvas view coordinate base
+    NSPoint mouseDraggedPositionInObject = [self convertPoint:[theEvent locationInWindow] fromView:nil]; 
+    NSPoint mousePositionInCanvas = [self convertPoint:mouseDraggedPositionInObject toView:self.superview];   
+    
+    // adjust object origin based on mouseDownPositionInObject
+    [self setFrame:NSMakeRect(mousePositionInCanvas.x - mouseDownPositionInObject.x,
+                              mousePositionInCanvas.y - mouseDownPositionInObject.y,
+                              self.frame.size.width, self.frame.size.height)];
+    
+    [self.superview setNeedsDisplay:YES];
+    [self setNeedsDisplay:YES];
+    
+    [self.superview needsDisplay];
+    [self needsDisplay];
+  }
+}
+
+- (void)mouseUp:(NSEvent *)theEvent {
+  mouseDownPositionInObject = NSZeroPoint;
+}
+
+- (void)mouseEntered:(NSEvent *)theEvent { cursor = [NSCursor resizeRightCursor]; }
+
+- (void)mouseExited:(NSEvent *)theEvent { cursor = [NSCursor arrowCursor]; }
+
+- (void)cursorUpdate:(NSEvent *)event { [cursor set]; }
 
 - (void)addObjectResizeTrackingRect:(NSRect)rect {
   objectResizeTrackingRect = NSMakeRect(self.frame.size.width - 10, 20,
@@ -317,60 +368,6 @@
   [self addTrackingArea:objectResizeTrackingArea];
 }
 
-- (void)mouseEntered:(NSEvent *)theEvent {
-  cursor = [NSCursor resizeRightCursor];
-}
-
-- (void)mouseExited:(NSEvent *)theEvent {
-  cursor = [NSCursor arrowCursor];
-}
-
-- (void)cursorUpdate:(NSEvent *)event {
-  [cursor set];
-}
-
-- (void)mouseDown:(NSEvent *)theEvent {
-  
-}
-
-- (void)mouseDragged:(NSEvent *)theEvent {
-  
-  if ([(CanvasView *)self.superview isEditModeOn]) {
-    
-    // convert mouse location to object view coordinate base
-    NSPoint mousePositionInObject = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-    
-    // convert mouse location to canvas view coordinate base
-    NSPoint mousePositionInCanvas = [self convertPoint:mousePositionInObject toView:self.superview];
-    
-    // TODO(joewhite4): adjust object origin to take into account the position inside the object
-    // Currently not working, something to do with the convertPoint functions I think
-    [self setFrame:NSMakeRect(mousePositionInCanvas.x, mousePositionInCanvas.y,
-                              self.frame.size.width, self.frame.size.height)];
-    
-    [self.superview setNeedsDisplay:YES];
-    [self setNeedsDisplay:YES];
-    
-    [self.superview needsDisplay];
-    [self needsDisplay];
-  }
-  
-}
-
-
-#pragma mark - Let Events
-
-- (void)mouseDownOfLet:(LetView *)aLetView {
-  [delegate startNewConnectionDrawingFromLet:aLetView];
-}
-
-- (void)mouseDraggedOfLet:(LetView *)aLetView withEvent:(NSEvent *)theEvent {
-  [delegate setNewConnectionEndPointFromLet:aLetView withEvent:theEvent];
-}
-
-- (void)mouseUpOfLet:(LetView *)aLetView withEvent:(NSEvent *)theEvent {
-  [delegate endNewConnectionDrawingFromLet:aLetView withEvent:theEvent];
-}
 
 #pragma mark - ZenGarden Objects
 

@@ -29,8 +29,8 @@
 
 }
 
-@property (nonatomic, readwrite) BOOL isInlet;
-@property (nonatomic, readwrite) BOOL isHighlighted;
+@property (nonatomic) BOOL isInlet;
+@property (nonatomic) BOOL isHighlighted;
 
 - (void)drawBackground;
 
