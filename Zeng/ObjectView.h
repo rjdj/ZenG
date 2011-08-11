@@ -10,18 +10,19 @@
 #import "LetView.h"
 #import "ZenGarden.h"
 
+@class ObjectView;
 
 @protocol ObjectViewDelegate
 
-- (ZGObject *)addNewObjectToGraphWithInitString:(NSString *)initString withLocation:(NSPoint)location;
+//- (ZGObject *)addNewObjectToGraphWithInitString:(NSString *)initString withLocation:(NSPoint)location;
 
-- (void)startNewConnectionDrawingFromLet:(LetView *)aLetView;;
+//- (void)startNewConnectionDrawingFromLet:(LetView *)aLetView;;
 
-- (void)setNewConnectionEndPointFromLet:(LetView *)aLetView withEvent:(NSEvent *)theEvent;
+//- (void)setNewConnectionEndPointFromLet:(LetView *)aLetView withEvent:(NSEvent *)theEvent;
 
-- (void)endNewConnectionDrawingFromLet:(LetView *)aLetView withEvent:(NSEvent *)theEvent;
+//- (void)endNewConnectionDrawingFromLet:(LetView *)aLetView withEvent:(NSEvent *)theEvent;
 
-- (NSArray *)allObjectLabels;
+//- (NSArray *)allObjectLabels;
 
 @end
 

@@ -77,17 +77,29 @@
 
 - (void)drawRect:(NSRect)dirtyRect {
   
+  if ([[self window] firstResponder] == self) {
+    
+    [NSGraphicsContext saveGraphicsState];
+    
+    [[NSColor redColor] set];
+    NSSetFocusRingStyle(NSFocusRingOnly);
+    [[NSBezierPath bezierPathWithRect:[self bounds]] fill];
+    
+    [NSGraphicsContext restoreGraphicsState];
+  }
+  
   [textField setFrame:NSMakeRect(self.bounds.origin.x + 5,
                                  self.bounds.origin.y + 8,
                                  self.bounds.size.width - 10,
                                  self.bounds.size.height - 14)];
- 
+  
   [self drawBackground:self.bounds];
   
   if ([[self window] isKeyWindow] && [[self window] firstResponder] == self) {
-
+    
     NSLog(@"Draw Focus Ring");
   }
+  
 }
 
 - (BOOL)isFlipped { return YES; }
@@ -318,19 +330,31 @@
 }
 
 - (void)mouseDown:(NSEvent *)theEvent {
-  // Only works in edit mode
-  if ([(CanvasView *)self.superview isEditModeOn]) {
-    // Highlight object
-    [self highlightObject:YES];
-  }
-  // Adjust mouse position when dragging to keep it in place relative to the object
-  NSPoint adjustedMousePosition = [self positionInsideObject:[theEvent locationInWindow]];
-  [(CanvasView *)self.superview moveObject:self with:adjustedMousePosition];
+  
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent {
-  // Call CanvasMainView mouse dragged event
-  [super mouseDragged:theEvent];
+  
+  if ([(CanvasView *)self.superview isEditModeOn]) {
+    
+    // convert mouse location to object view coordinate base
+    NSPoint mousePositionInObject = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+    
+    // convert mouse location to canvas view coordinate base
+    NSPoint mousePositionInCanvas = [self convertPoint:mousePositionInObject toView:self.superview];
+    
+    // TODO(joewhite4): adjust object origin to take into account the position inside the object
+    // Currently not working, something to do with the convertPoint functions I think
+    [self setFrame:NSMakeRect(mousePositionInCanvas.x, mousePositionInCanvas.y,
+                              self.frame.size.width, self.frame.size.height)];
+    
+    [self.superview setNeedsDisplay:YES];
+    [self setNeedsDisplay:YES];
+    
+    [self.superview needsDisplay];
+    [self needsDisplay];
+  }
+  
 }
 
 

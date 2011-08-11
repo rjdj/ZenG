@@ -17,11 +17,6 @@
 
 - (BOOL)acceptsFirstResponder { return YES; }
 
-- (void)mouseDown:(NSEvent *)theEvent {
-  NSPoint invertedMousePoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-  NSLog(@"Mouse Down x:%f y:%f", invertedMousePoint.x, invertedMousePoint.y);
-}
-
 - (id)initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
@@ -54,14 +49,6 @@
   
   [self setNeedsDisplay:YES];
   [self needsDisplay];
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder {
-  self = [super initWithCoder:aDecoder];
-  if (self) {
-    
-  }
-  return self;
 }
 
 - (void)dealloc
@@ -114,7 +101,6 @@
     // for every outletView in each object
     for (LetView *outletView in anObject.outletArray) {
       
-      NSLog(@"Object Outlet View x:%f y:%f", outletView.frame.origin.x, outletView.frame.origin.y);
       // set connection start point at current outlet
       NSPoint outletMidPoint = NSMakePoint(NSMidX(outletView.frame), outletView.frame.origin.y);
       NSPoint connectionStartPoint = NSMakePoint(outletMidPoint.x + anObject.frame.origin.x,
@@ -149,13 +135,17 @@
         [NSBezierPath setDefaultLineWidth:2.0f];
         [NSBezierPath strokeLineFromPoint:connectionStartPoint
                                   toPoint:connectionEndPoint];
-        NSLog(@"Connection Start x:%f, y:%f", connectionStartPoint.x, connectionStartPoint.y);
-        NSLog(@"Connection End x:%f, y:%f", connectionEndPoint.x, connectionEndPoint.y);
       }
       
       free(zgConnectionPair);
     }
   }
+}
+
+- (void)mouseDown:(NSEvent *)theEvent {
+  [[self window] becomeFirstResponder];
+  [self setNeedsDisplay:YES];
+  [self needsDisplay];
 }
 
 @end
