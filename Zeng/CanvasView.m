@@ -14,6 +14,9 @@
 @synthesize zgGraph;
 @synthesize delegate;
 
+
+#pragma mark - Initalisation & Deallocation
+
 - (BOOL)isFlipped { return YES; }
 
 - (BOOL)acceptsFirstResponder { return YES; }
@@ -23,14 +26,15 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code here.
-        objectSet = [[NSMutableSet alloc] init];
+      objectSet = [[NSMutableSet alloc] init];
+      selectionStartPoint = NSZeroPoint;
+      selectionEndPoint = NSZeroPoint;
     }
-    
+  
     return self;
 }
 
 - (void)setZgGraph:(ZGGraph *)graph {
-  NSLog(@"setZgGraph");
   // set instance zgGraph and objectSet
   zgGraph = graph;
 
@@ -52,40 +56,25 @@
   [self needsDisplay];
 }
 
-- (NSArray *)allObjectLabels {
-  return [delegate getAllObjectLabels];
-}
-
 - (void)dealloc
 {
   [objectSet release];
   [super dealloc];
 }
 
+
+#pragma mark - Drawing
+
 - (void)drawRect:(NSRect)dirtyRect
 {
-  // Drawing code here
   [self drawBackground:self.bounds];
+  
+  if (isEditModeOn) {
+    [self drawSelectionRectangle];
+  }
+  
   [self drawExistingConnections];
 }
-
-- (void)toggleEditMode:(id)sender {
-  
-  isEditModeOn = !isEditModeOn;
-  NSLog(@"EditMode %d", isEditModeOn);
-  [sender setState:isEditModeOn ? NSOnState : NSOffState];
-  
-  // Set objects to be editable
-  /*
-   for (ObjectView *object in arrayOfObjects) {
-   [object setTextFieldEditable:isEditModeOn];
-   }
-   */
-   [self setNeedsDisplay:YES];
-   [self needsDisplay];
-}
-
-#pragma mark - Background Drawing
 
 - (void)drawBackground:(NSRect)rect {
   if (isEditModeOn) {
@@ -147,8 +136,76 @@
   }
 }
 
+- (void)drawSelectionRectangle {
+  
+  NSRect selectionRect = [self rectFromTwoPoints:selectionStartPoint toLocation:selectionEndPoint];
+  NSBezierPath *selectionPath = [NSBezierPath bezierPathWithRect:selectionRect];
+  NSColor *theSelectionColor = [NSColor blackColor];
+  CGFloat selectionDashArray[2] = { 5.0, 2.0 };
+  [selectionPath setLineWidth:1];
+  [selectionPath setLineDash: selectionDashArray count: 2 phase: 0.0];
+  [theSelectionColor setStroke];
+  [selectionPath stroke];
+  
+  // highlight objects within selection rect
+  selectedObjectsCount = 0;
+  for (ObjectView *anObject in objectSet) {
+    if (NSIntersectsRect(selectionRect, [anObject frame])) {
+      selectedObjectsCount++;
+      [(ObjectView *)anObject setIsHighlighted:YES];
+    }
+    else {
+      [(ObjectView *)anObject setIsHighlighted:NO];
+    }
+  }
+}
+
+- (NSRect)rectFromTwoPoints:(NSPoint)firstPoint toLocation:(NSPoint)secondPoint {
+  return NSMakeRect(MIN(firstPoint.x, secondPoint.x),
+                    MIN(firstPoint.y, secondPoint.y),
+                    fabs(firstPoint.x - secondPoint.x),
+                    fabs(firstPoint.y - secondPoint.y));
+} 
+
+#pragma mark - Mouse Events
+
 - (void)mouseDown:(NSEvent *)theEvent {
-  [[self window] becomeFirstResponder];
+  selectionStartPoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+}
+
+- (void)mouseDragged:(NSEvent *)theEvent {
+  selectionEndPoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+  [self setNeedsDisplay:YES];
+  [self needsDisplay];
+}
+
+
+- (void)mouseUp:(NSEvent *)theEvent {
+  // reset selection path points
+  selectionStartPoint = NSZeroPoint;
+  selectionEndPoint = NSZeroPoint;
+  [self setNeedsDisplay:YES];
+  [self needsDisplay];
+}
+
+#pragma mark - Autocomplete
+
+- (NSArray *)allObjectLabels {
+  return [delegate getAllObjectLabels];
+}
+
+
+#pragma mark - Menu
+
+- (void)toggleEditMode:(id)sender {
+  
+  isEditModeOn = !isEditModeOn;
+  [sender setState:isEditModeOn ? NSOnState : NSOffState];
+  
+  for (ObjectView *object in objectSet) {
+    [object setTextFieldEditable:isEditModeOn];
+  }
+  
   [self setNeedsDisplay:YES];
   [self needsDisplay];
 }

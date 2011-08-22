@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface ObjectTextField : NSView {
+@interface ObjectTextField : NSTextField {
 @private
     
 }

@@ -12,11 +12,13 @@
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<string>NSCustomView</string>
-			<string>NSWindowTemplate</string>
 			<string>NSView</string>
-			<string>NSCustomObject</string>
 			<string>NSSplitView</string>
+			<string>NSWindowTemplate</string>
+			<string>NSCustomView</string>
+			<string>NSButtonCell</string>
+			<string>NSButton</string>
+			<string>NSCustomObject</string>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -37,7 +39,7 @@
 			<object class="NSWindowTemplate" id="275939982">
 				<int key="NSWindowStyleMask">15</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{133, 235}, {600, 497}}</string>
+				<string key="NSWindowRect">{{133, 235}, {795, 701}}</string>
 				<int key="NSWTFlags">1886912512</int>
 				<string key="NSWindowTitle">Window</string>
 				<string key="NSWindowClass">NSWindow</string>
@@ -51,10 +53,46 @@
 						<object class="NSCustomView" id="937450435">
 							<reference key="NSNextResponder" ref="568628114"/>
 							<int key="NSvFlags">266</int>
-							<string key="NSFrame">{{0, 447}, {600, 50}}</string>
+							<object class="NSMutableArray" key="NSSubviews">
+								<bool key="EncodedWithXMLCoder">YES</bool>
+								<object class="NSButton" id="195879883">
+									<reference key="NSNextResponder" ref="937450435"/>
+									<int key="NSvFlags">268</int>
+									<string key="NSFrame">{{714, 14}, {63, 18}}</string>
+									<reference key="NSSuperview" ref="937450435"/>
+									<reference key="NSWindow"/>
+									<reference key="NSNextKeyView" ref="305679216"/>
+									<bool key="NSEnabled">YES</bool>
+									<object class="NSButtonCell" key="NSCell" id="788920272">
+										<int key="NSCellFlags">67239424</int>
+										<int key="NSCellFlags2">0</int>
+										<string key="NSContents">DSP</string>
+										<object class="NSFont" key="NSSupport">
+											<string key="NSName">LucidaGrande</string>
+											<double key="NSSize">13</double>
+											<int key="NSfFlags">1044</int>
+										</object>
+										<reference key="NSControlView" ref="195879883"/>
+										<int key="NSButtonFlags">1211912703</int>
+										<int key="NSButtonFlags2">268435458</int>
+										<object class="NSCustomResource" key="NSNormalImage">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">NSSwitch</string>
+										</object>
+										<object class="NSButtonImageSource" key="NSAlternateImage">
+											<string key="NSImageName">NSSwitch</string>
+										</object>
+										<string key="NSAlternateContents"/>
+										<string key="NSKeyEquivalent">.</string>
+										<int key="NSPeriodicDelay">200</int>
+										<int key="NSPeriodicInterval">25</int>
+									</object>
+								</object>
+							</object>
+							<string key="NSFrame">{{0, 651}, {795, 50}}</string>
 							<reference key="NSSuperview" ref="568628114"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="305679216"/>
+							<reference key="NSNextKeyView" ref="195879883"/>
 							<string key="NSClassName">HeaderView</string>
 						</object>
 						<object class="NSSplitView" id="305679216">
@@ -70,7 +108,7 @@
 										<object class="NSCustomView" id="549983134">
 											<reference key="NSNextResponder" ref="995863356"/>
 											<int key="NSvFlags">256</int>
-											<string key="NSFrameSize">{133, 309}</string>
+											<string key="NSFrameSize">{144, 454}</string>
 											<reference key="NSSuperview" ref="995863356"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="820482652"/>
@@ -79,14 +117,14 @@
 										<object class="NSCustomView" id="820482652">
 											<reference key="NSNextResponder" ref="995863356"/>
 											<int key="NSvFlags">256</int>
-											<string key="NSFrame">{{0, 319}, {133, 128}}</string>
+											<string key="NSFrame">{{0, 464}, {144, 187}}</string>
 											<reference key="NSSuperview" ref="995863356"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="31432078"/>
 											<string key="NSClassName">HelpView</string>
 										</object>
 									</object>
-									<string key="NSFrameSize">{133, 447}</string>
+									<string key="NSFrameSize">{144, 651}</string>
 									<reference key="NSSuperview" ref="305679216"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="549983134"/>
@@ -95,13 +133,13 @@
 								<object class="NSCustomView" id="31432078">
 									<reference key="NSNextResponder" ref="305679216"/>
 									<int key="NSvFlags">256</int>
-									<string key="NSFrame">{{143, 0}, {457, 447}}</string>
+									<string key="NSFrame">{{154, 0}, {641, 651}}</string>
 									<reference key="NSSuperview" ref="305679216"/>
 									<reference key="NSWindow"/>
 									<string key="NSClassName">CanvasView</string>
 								</object>
 							</object>
-							<string key="NSFrameSize">{600, 447}</string>
+							<string key="NSFrameSize">{795, 651}</string>
 							<reference key="NSSuperview" ref="568628114"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="995863356"/>
@@ -109,7 +147,7 @@
 							<int key="NSDividerStyle">3</int>
 						</object>
 					</object>
-					<string key="NSFrame">{{7, 11}, {600, 497}}</string>
+					<string key="NSFrame">{{7, 11}, {795, 701}}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="937450435"/>
@@ -173,6 +211,14 @@
 					</object>
 					<int key="connectionID">100045</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">toggleDSPSwitch:</string>
+						<reference key="source" ref="512844837"/>
+						<reference key="destination" ref="195879883"/>
+					</object>
+					<int key="connectionID">100048</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -226,6 +272,10 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">100021</int>
 						<reference key="object" ref="937450435"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="195879883"/>
+						</object>
 						<reference key="parent" ref="568628114"/>
 						<string key="objectName">Header View</string>
 					</object>
@@ -267,6 +317,21 @@
 						<reference key="object" ref="549983134"/>
 						<reference key="parent" ref="995863356"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">100046</int>
+						<reference key="object" ref="195879883"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="788920272"/>
+						</object>
+						<reference key="parent" ref="937450435"/>
+						<string key="objectName">DSP Switch</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">100047</int>
+						<reference key="object" ref="788920272"/>
+						<reference key="parent" ref="195879883"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -280,6 +345,8 @@
 					<string>100024.IBPluginDependency</string>
 					<string>100025.IBPluginDependency</string>
 					<string>100026.IBPluginDependency</string>
+					<string>100046.IBPluginDependency</string>
+					<string>100047.IBPluginDependency</string>
 					<string>5.IBEditorWindowLastContentRect</string>
 					<string>5.IBPluginDependency</string>
 					<string>5.IBWindowTemplateEditedContentRect</string>
@@ -290,6 +357,8 @@
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -318,7 +387,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">100045</int>
+			<int key="maxID">100048</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -358,6 +427,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">ZGProjectWindowController</string>
 					<string key="superclassName">NSWindowController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">toggleDSPSwitch:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">toggleDSPSwitch:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">toggleDSPSwitch:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
@@ -419,5 +499,9 @@
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
+		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="NS.key.0">NSSwitch</string>
+			<string key="NS.object.0">{15, 15}</string>
+		</object>
 	</data>
 </archive>

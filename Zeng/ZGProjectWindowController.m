@@ -37,10 +37,11 @@ void zgCallbackFunction(ZGCallbackFunction function, void *userData, void *ptr) 
 - (id)initWithWindowNibName:(NSString *)windowNibName {
   self = [super initWithWindowNibName:windowNibName];
   if (self) {
+    isDSPSwitchOn = NO;
     // Add pdAudio and zgContext 
     pdAudio = [[PdAudio alloc] initWithInputChannels:0 OutputChannels:2 blockSize:256
         andSampleRate:44100.0];
-    [pdAudio play];
+    [pdAudio pause];
     zgContext = pdAudio.zgContext;
     
     
@@ -58,11 +59,11 @@ void zgCallbackFunction(ZGCallbackFunction function, void *userData, void *ptr) 
   [super dealloc];
 }
 
-- (void)setProjectFilePath:(NSString *)projectFilePath {
+- (void)setProjectFilePath:(NSString *)aProjectFilePath {
   
   // create new zgGraph based on project file path
-  NSString *directory = [[projectFilePath stringByDeletingLastPathComponent] stringByAppendingString:@"/"];
-  NSString *fileName = [projectFilePath lastPathComponent];
+  NSString *directory = [[aProjectFilePath stringByDeletingLastPathComponent] stringByAppendingString:@"/"];
+  NSString *fileName = [aProjectFilePath lastPathComponent];
   ZGGraph *zgGraph = zg_context_new_graph_from_file(zgContext,
                                                     [directory cStringUsingEncoding:NSASCIIStringEncoding],
                                                     [fileName cStringUsingEncoding:NSASCIIStringEncoding]);
@@ -122,6 +123,17 @@ void zgCallbackFunction(ZGCallbackFunction function, void *userData, void *ptr) 
     //[allObjectLabelsArray sortUsingSelector:@selector(compare:)];
   }
   return allObjectLabelsArray;
+}
+
+- (IBAction)toggleDSPSwitch:(id)sender {
+  isDSPSwitchOn = !isDSPSwitchOn;
+  NSLog(@"DSP %d", isDSPSwitchOn);
+  [sender setState:isDSPSwitchOn ? NSOnState : NSOffState];
+  if (isDSPSwitchOn) {
+    [pdAudio play];
+  } else {
+    [pdAudio pause];
+  }
 }
              
 @end

@@ -16,6 +16,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code here.
+      NSLog(@"INIT TEXT FIELD");
     }
     
     return self;
@@ -30,5 +31,22 @@
 {
     // Drawing code here.
 }
+
+- (void)textDidChange:(NSNotification *)notification {
+  
+}
+
+- (void)textDidBeginEditing:(NSNotification *)notification {
+  NSLog(@"Text BEgin Editing"); 
+}
+
+- (void)textDidEndEditing:(NSNotification *)notification {
+  
+}
+
+- (void)controlTextDidChange:(NSNotification *)obj {
+  
+}
+
 
 @end

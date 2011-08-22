@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "LetView.h"
+#import "ObjectTextField.h"
 #import "ZenGarden.h"
 
 @class ObjectView;
@@ -36,8 +37,8 @@
   NSMutableArray *outletArray;
 
   // Textfield
-  NSTextField *textField;
-  NSTextView *fieldEditor;
+  ObjectTextField *textField;
+//  NSTextView *fieldEditor;
   BOOL didTextChange;
   BOOL isObjectNew;
   NSString *previousString;

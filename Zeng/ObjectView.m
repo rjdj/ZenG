@@ -100,6 +100,7 @@
 #pragma mark - Drawing
 
 - (void)setIsHighlighted:(BOOL)state {
+  NSLog(@"isHighlighted: %d", [self isHighlighted]);
   [self setNeedsDisplay:YES];
   [self needsDisplay];
 }
@@ -194,7 +195,7 @@
   [textField setBezeled:NO];
   [textField setDrawsBackground:NO];
   [textField setFont:[NSFont fontWithName:@"Monaco" size:12.0]];
-  [textField setFocusRingType:NSFocusRingOnly];
+  [textField setFocusRingType:NSFocusRingTypeNone];
   [self addSubview:textField];
   [textField setDelegate:self];
 }
@@ -219,6 +220,7 @@
   if (!isObjectNew) {
     didTextChange = YES;
   }
+  /*
   // Currently an infinite loop
   //[fieldEditor completionsForPartialWordRange:NSRangeFromString([textField stringValue]) indexOfSelectedItem:0];
   //[fieldEditor complete:nil];
@@ -229,9 +231,10 @@
     return;
   }
   else {
-    previousString = [[fieldEditor string] copy];
-    [fieldEditor complete:nil];
+  //  previousString = [[fieldEditor string] copy];
+   // [fieldEditor complete:nil];
   }
+   */
 }
 
 - (BOOL)textView:(NSTextView *)textView doCommandBySelector:(SEL)commandSelector {
@@ -272,30 +275,48 @@
   // if textfield changes reinstantiate object 
   NSLog(@"Ended editing");
   if (didTextChange) {
-    [self removeZGObjectFromZGGraph:[(CanvasView *)self.superview zgGraph]];
+    
+    // remove previous object
+    if (zgObject != NULL) {
+      zg_object_remove(zgObject);
+    }
+    else {
+      NSLog(@"No ZGObject to remove");
+    }
+    
+    // clear let views and let arrays
     for (LetView *aLetView in inletArray) {
       [aLetView removeFromSuperview];
     }
     for (LetView *aLetView in outletArray) {
       [aLetView removeFromSuperview];
     }
+    
     [inletArray removeAllObjects];
     [outletArray removeAllObjects];
+    
+    // reset text changed flag
     didTextChange = NO;
-  }
-  // Add zgObject
-  zgObject = [delegate addNewObjectToGraphWithInitString:[textField stringValue]
-                                            withLocation:self.frame.origin];
-  if (zgObject == NULL) {
-    NSLog(@"zgObject could not be created.");
-  } else {
-    // Add inlets
-    for (int i = 0; i < zg_object_get_num_inlets(zgObject); i++) {
-      [self addLet:NSMakePoint(self.bounds.origin.x + 10 + 38*i, 3) isInlet:YES];
+    
+    // add new zgObject with textfield string
+    zgObject = zg_graph_add_new_object([(CanvasView *)self.superview zgGraph],
+                                       [[textField stringValue] cStringUsingEncoding:NSASCIIStringEncoding],
+                                       self.frame.origin.x,
+                                       self.frame.origin.y);
+    
+    if (zgObject == NULL) {
+      // TODO(joewhite4): Change object view to show object could not be created
+      NSLog(@"zgObject could not be created.");
     }
-    // Add outlets
-    for (int i = 0; i < zg_object_get_num_outlets(zgObject); i++) {
-      [self addLet:NSMakePoint(self.bounds.origin.x + 10 + 70*i, self.bounds.size.height - 6) isInlet:NO];
+    else {
+      // add inlets
+      for (int i = 0; i < zg_object_get_num_inlets(zgObject); i++) {
+        [self addLet:NSMakePoint(self.bounds.origin.x + 10 + 38*i, 3) isInlet:YES];
+      }
+      // add outlets
+      for (int i = 0; i < zg_object_get_num_outlets(zgObject); i++) {
+        [self addLet:NSMakePoint(self.bounds.origin.x + 10 + 70*i, self.bounds.size.height - 6) isInlet:NO];
+      }
     }
   }
   isObjectNew = NO;
@@ -338,6 +359,7 @@
 }
 
 - (void)mouseUp:(NSEvent *)theEvent {
+  
   mouseDownPositionInObject = NSZeroPoint;
 }
 
@@ -348,6 +370,7 @@
 - (void)cursorUpdate:(NSEvent *)event { [cursor set]; }
 
 - (void)addObjectResizeTrackingRect:(NSRect)rect {
+  
   objectResizeTrackingRect = NSMakeRect(self.frame.size.width - 10, 20,
                                         10, self.frame.size.height - 40);
 }
@@ -366,18 +389,6 @@
                                         NSTrackingCursorUpdate)
                               owner:self userInfo:nil];
   [self addTrackingArea:objectResizeTrackingArea];
-}
-
-
-#pragma mark - ZenGarden Objects
-
-- (void)removeZGObjectFromZGGraph:(ZGGraph *)graph {
-  if (zgObject != NULL) {
-    zg_object_remove(zgObject);
-  }
-  else {
-    NSLog(@"No ZGObject to remove");
-  }
 }
 
 @end

@@ -26,6 +26,11 @@
   ZGGraph *zgGraph;
   NSMutableSet *objectSet;
   
+  // selection path
+  NSPoint selectionStartPoint;
+  NSPoint selectionEndPoint;
+  int selectedObjectsCount;
+  
 }
 
 @property (nonatomic, readonly) BOOL isEditModeOn;
@@ -39,5 +44,9 @@
 - (void)drawBackground:(NSRect)rect;
 
 - (void)drawExistingConnections;
+
+- (void)drawSelectionRectangle;
+
+- (NSRect)rectFromTwoPoints:(NSPoint)firstPoint toLocation:(NSPoint)secondPoint;
 
 @end

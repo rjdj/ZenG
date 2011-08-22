@@ -28,6 +28,8 @@
   NSMutableArray *builtInObjectLabelsArray;
   NSMutableArray *allObjectLabelsArray;
   
+  BOOL isDSPSwitchOn;
+  
 @private
   
 }
@@ -37,5 +39,7 @@
 @property (nonatomic, retain) IBOutlet HelpView *helpView;
 @property (nonatomic, retain) IBOutlet CanvasView *canvasView;
 @property (nonatomic, retain) NSString *projectFilePath;
+
+- (IBAction)toggleDSPSwitch:(id)sender;
 
 @end
