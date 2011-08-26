@@ -6,6 +6,8 @@ itself is a C++ runtime library for [Pure Data](http://puredata.info/) (Pd) - an
 
 The GUI is written in Objective C and is currently OS X only due using the Cocoa APIs.
 
+At the moment Zeng can only open Pd patches and move/edit objects - It's not 100% functional yet.
+
 Screenshots
 ===========
 
