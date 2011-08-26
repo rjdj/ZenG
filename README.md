@@ -5,3 +5,11 @@ Zeng (will probably be renamed soon) is a GUI interface for [ZenGarden](https://
 itself is a C++ runtime library for [Pure Data](http://puredata.info/) (Pd) - an audio programming language.
 
 The GUI is written in Objective C and is currently OS X only due using the Cocoa APIs.
+
+
+How To Get Started
+==================
+
+* Download the Zeng repository at https://github.com/joewhite4/Zeng
+* Update the ZenGarden submodule repository
+* Follow the instructions for building the ZenGarden library from here https://github.com/mhroth/ZenGarden
